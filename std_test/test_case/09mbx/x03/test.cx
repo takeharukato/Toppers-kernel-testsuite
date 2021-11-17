@@ -1,0 +1,53 @@
+#include <kernel.h>
+#include "test.h"
+#include "kernel_id.h"
+
+#define _TEST_TIME 2
+#define _LAST_STEP 16
+#define _NEED_TEST_ROUTINES
+#include "test_com.h"
+
+T_CMBX k_cmbx1 = { TA_TFIFO|TA_MFIFO, MAXMPRI_3, NULL } ;
+
+void TASK1(VP_INT exinf)
+{
+	ER ercd ;
+									_CHECK_STEP( 10 ) ;
+	ercd = rcv_mbx( MBX_ID1, ppk_msg ) ;
+									_CHECK_STEP( 13 ) ;
+	_CHECK_ASSERT_E_DLT( ercd ) ;
+									_CHECK_STEP( 14 ) ;
+	ext_tsk() ;
+}
+
+void TASK2(VP_INT exinf)
+{
+	ER ercd ;
+									_CHECK_STEP( 1 ) ;
+	ercd = del_mbx( ERR_MBX_ID ) ;
+									_CHECK_STEP( 2 ) ;
+	_CHECK_ASSERT_E_ID( ercd ) ;
+									_CHECK_STEP( 3 ) ;
+	ercd = del_mbx( MBX_ID1 ) ;
+									_CHECK_STEP( 4 ) ;
+	_CHECK_ASSERT_E_NOEXS( ercd ) ;
+									_CHECK_STEP( 5 ) ;
+	ercd = del_mbx( MBX_ID2 ) ;
+									_CHECK_STEP( 6 ) ;
+	_CHECK_ASSERT_E_OK( ercd ) ;
+									_CHECK_STEP( 7 ) ;
+	ercd = cre_mbx( MBX_ID1, &k_cmbx1 ) ;
+									_CHECK_STEP( 8 ) ;
+	_CHECK_ASSERT_E_OK( ercd ) ;
+									_CHECK_STEP( 9 ) ;
+	ercd = act_tsk( TASK_ID1 ) ;
+									_CHECK_STEP( 11 ) ;
+	_CHECK_ASSERT_E_OK( ercd ) ;
+									_CHECK_STEP( 12 ) ;
+	ercd = del_mbx( MBX_ID1 ) ;
+									_CHECK_STEP( 15 ) ;
+	_CHECK_ASSERT_E_OK( ercd ) ;
+									_CHECK_STEP( 16 ) ;
+	ext_tsk() ;
+}
+

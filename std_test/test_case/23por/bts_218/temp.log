@@ -1,0 +1,23 @@
+CONSOLE->
+CONSOLE->advicePLUS server (Jun 23 2003 16:19:48)
+CONSOLE->Copyright (C) 2002 Green Hills Software, Inc. All rights reserved.
+CONSOLE->[NAK] (f0b)
+CONSOLE->[NAK] (f0b)
+CONSOLE->RESET: initialize error
+
+CONSOLE->adpserv: break at : compulsion
+
+Step1
+Step2
+	rdvno 0x20001(131073)
+Step3
+Step4
+Step5
+Step6
+Step7
+Step8
+---Reached Last Step---
+Target process presumed hung after 3 seconds.
+CONSOLE->adpserv: break at : compulsion
+
+grun: program ran for 21 seconds

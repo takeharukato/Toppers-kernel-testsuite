@@ -1,0 +1,8 @@
+mpu 0 9 1
+mpu 0 10 4
+mpu 0 13 0
+mpu 7 8 1
+rst
+run
+halt
+
